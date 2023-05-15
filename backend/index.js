@@ -8,7 +8,7 @@ const Payroll = require('./models/payrollSchema');
 
 
 let url =
-  "";
+  "mongodb+srv://areeb:12345@cluster0.hcn5lr8.mongodb.net/";
 
 mongoose
   .connect(url)
@@ -24,7 +24,7 @@ mongoose
 const app = express();
 app.use(express.json());
 app.use(cors());
-const port = 3001;
+const port = 3002;
 
 
 const jwt = require('jsonwebtoken');
