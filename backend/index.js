@@ -3,8 +3,8 @@ const express = require('express');
 const router = express.Router();
 const cors = require("cors");
 const mongoose = require("mongoose");
-const Order = require('../models/orderSchema');
-const Payroll = require('../models/payrollSchema');
+const Order = require('./models/orderSchema');
+const Payroll = require('./models/payrollSchema');
 
 
 let url =
@@ -30,7 +30,7 @@ const port = 3001;
 const jwt = require('jsonwebtoken');
 const secretKey = 'mysecretkey';
 
-// Define the API endpoint for a rider to receive an order
+// API endpoint for a rider to receive an order
 router.put('/orders/:id/receive', authenticateToken, async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -49,7 +49,7 @@ router.put('/orders/:id/receive', authenticateToken, async (req, res) => {
   }
 });
 
-// Define the API endpoint for a waiter to view orders
+// API endpoint for a waiter to view orders
 router.get('/orders', authenticateToken, async (req, res) => {
   try {
     const orders = await Order.find({ status: { $ne: 'Delivered' } }).populate('rider');
@@ -60,7 +60,7 @@ router.get('/orders', authenticateToken, async (req, res) => {
   }
 });
 
-// Define the API endpoint for a waiter to view their payroll
+// API endpoint for a waiter to view their payroll
 router.get('/payroll', authenticateToken, async (req, res) => {
   try {
     const payroll = await Payroll.find({ waiter: req.user._id });
